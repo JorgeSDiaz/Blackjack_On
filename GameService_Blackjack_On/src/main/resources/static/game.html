@@ -13,105 +13,23 @@
     <title>Poker On</title>
 </head>
 <body onload="app.init()">
-<!-- Header -->
-<nav id="header" class="navbar navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="src/logo.png" alt="logo">
-      </a>
-      <a class="navbar-brand" href="#">BJON</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Opciones</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Configuración</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">{USER}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">{Tokens}</a>
-            </li>
-          </ul>
-          
-        </div>
-      </div>
+<div id="zone-bet">
+    <div id="bar">
+        <div id="filler"></div>
+        <div id= "ball"></div>
     </div>
-</nav>
-<!-- Main -->
-<main id="main">
-    <div class="principal">
-        <div class="left">
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 col-lg-3">
-                        <img src="src/red.png" alt="ficha roja" class="boton-rojo" width="50" height="50" onclick="app.tokenSelected('red')" alt="$10" style="cursor: pointer; padding: 3px;">
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <img src="src/yellow.png" alt="ficha amarilla" class="boton-amarillo" width="50" height="50" onclick="app.tokenSelected('yellow')" alt="$50" style="cursor: pointer; padding: 3px;">
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <img src="src/blue.png" alt="ficha azul" class="boton-azul" width="50" height="50" onclick="app.tokenSelected('blue')" alt="$100" style="cursor: pointer; padding: 3px;">
-                    </div>
-                    <div class="col-6 col-lg-3">
-                        <img src="src/green.png" alt="ficha verde" class="boton-verde" width="50" height="50" onclick="app.tokenSelected('green')" alt="$500" style="cursor: pointer; padding: 3px;">
-                    </div>
-                </div>
-            </div>
-            
-           <div class="div-container">
-               <div class="container">21</div>
-               <div class="container">20</div>
-               <div class="container">19</div>
-               <div class="container">18</div>
-               <div class="container">17</div>
-               <div class="container">16</div>
-               <div class="container">15</div>
-           </div>
-    
-            <div class="canvas-container">
-                <canvas id="canvas1"></canvas>
-                <canvas id="canvas2"></canvas>
-                <canvas id="canvas3"></canvas>
-                <canvas id="canvas4"></canvas>
-                <canvas id="canvas5"></canvas>
-                <canvas id="canvas6"></canvas>
-                <canvas id="canvas7"></canvas>
-            </div>
-        </div>
-        <div class="right">
-            <canvas class="tablero" id="canvasTabla" width="600" height="350"></canvas>
-        </div>
-    </div>
-</main>
+    <input id="number" type="number" value="0">
+    <button id="button-bet">BET</button>
+</div>
+<div id="zone-table">
 
-<!-- Footer -->
-<footer id="footer" class="pb-4 pt-4">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-12 col-lg">
-                <a href="#">Reglas</a>
-            </div>
-            <div class="col-12 col-lg">
-                <a href="creadores.html">Creadores</a>
-            </div>
-            <div class="col-12 col-lg">
-                <a href="#">links</a>
-            </div>
-        </div>
-    </div>
+</div>
+<div id="zone-actions">
+        <button id="button-options">OPTIONS</button>
+        <button id="button-plant">PLANT</button>
+        <button id="button-fold">FOLD</button>
+</div>
 
-</footer>
 <!-- SockJs-Client -->
 <script src="/node_modules/sockjs-client/dist/sockjs.min.js"></script>
 <!-- Stomp-Websocket -->
@@ -124,5 +42,6 @@
 <!-- <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <script src="client.js"></script>
 <script src="app.js"></script>
+<script src="game.js"></script>
 </body>
 </html>
