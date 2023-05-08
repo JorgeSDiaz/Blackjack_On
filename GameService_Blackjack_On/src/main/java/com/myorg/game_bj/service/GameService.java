@@ -89,9 +89,6 @@ public class GameService {
         ));
     }
 
-    /*
-
-     */
     public Card draw() {
         int range = deck.size();
         int index = new Random().nextInt(range);
@@ -112,7 +109,6 @@ public class GameService {
 
     public List<Player> intoPlayer(Player newPlayer) {
         players.add(newPlayer);
-
         return players;
     }
 
