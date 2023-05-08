@@ -111,23 +111,23 @@ body {
 
 
 
-#button-options {
-  border: 2px solid white;
+#button-card {
+  border: 2px solid #012DAB;
   border-radius: 50%;
-  padding: 38px 17px;
+  padding: 40px 30px;
   background-color: transparent;
   color: #ffffff;
   font-size: 20px;
   font-weight: bold;
   z-index: 3;
-  top: 80px;
+  top: 200px;
   position: absolute;
 }
 
 #button-plant {
   border: 2px solid #0B8E05;
   border-radius: 50%;
-  padding: 38px 26px;
+  padding: 40px 25px;
   background-color: transparent;
   color: #ffffff;
   font-size: 20px;
@@ -183,4 +183,43 @@ body {
   top:500px;
   position: absolute;
   right: 230px;
+}
+
+.seat{
+  border : 2px solid red;
+  border-radius: 50%;
+  padding: 25px 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+}
+
+
+#seat1{
+  top: 80px;
+  right:-100px;
+}
+
+
+#seat2{
+  top: 80px;
+  left:-100px;
+}
+
+
+#seat3{
+  top: 300px;
+  left: 300px;
+  
+}
+
+#crupier{
+  padding: 40px 40px;
+  background-size: cover;
+  background-position: center;
+  top: -100px;
+  left: 300px
+
 }

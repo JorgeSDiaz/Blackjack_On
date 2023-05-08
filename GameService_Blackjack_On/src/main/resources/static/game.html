@@ -25,7 +25,7 @@
         </button>
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Opciones</h5>
+            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">OPTIONS</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
@@ -34,13 +34,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Configuración</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{USER}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">{Tokens}</a>
+                <a class="nav-link" href="#">EXIT</a>
                 </li>
             </ul>
             
@@ -59,11 +53,17 @@
     <button id="button-bet">BET</button>
 </div>
 <div id="zone-table">
-    <div class="table"></div>
+    <div class="table">
+        <div class="seat" id="seat1">EMPTY</div>
+        <div class="seat" id="seat2">EMPTY</div>
+        <div class="seat" id="seat3">EMPTY</div>
+        <div class="seat" id="crupier" style="background-image: url('src/bender.jpg');"></div>
+    </div>
+
     <button id="button-start">START</button>
 </div>
 <div id="zone-actions">
-        <button id="button-options">OPTIONS</button>
+        <button id="button-card">CARD</button>
         <button id="button-plant">PLANT</button>
         <button id="button-fold">FOLD</button>
 </div>
