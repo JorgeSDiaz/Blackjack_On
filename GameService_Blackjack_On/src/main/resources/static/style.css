@@ -227,19 +227,42 @@ body {
 
 
 #box-section{
-  background-color: #313346;
-  width: 200px;
-  height: 200px;
+  background-color: rgb(11, 91, 11);
+  width: 230px;
+  height: 230px;
   display: block;
   align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 2px solid #A2920E;
 
 }
 
+.box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  grid-template-rows: repeat(2, 1fr); /* 2 filas de igual altura */
+  justify-content: center;
+  align-items: center;
+}
 
+.box button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 3px;
+}
+
+.NONE{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3px;
+}
 
 .text{
   font-weight: bold;
