@@ -194,12 +194,13 @@ body {
   font-size: 20px;
   font-weight: bold;
   position: absolute;
+  transform: translate(-8%, -9%);
 }
 
 
 #seat1{
   top: 80px;
-  right:-100px;
+  right:-110px;
 }
 
 
@@ -222,4 +223,26 @@ body {
   top: -100px;
   left: 300px
 
+}
+
+
+#box-section{
+  background-color: #313346;
+  width: 200px;
+  height: 200px;
+  display: block;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+
+
+.text{
+  font-weight: bold;
+  color: #eee;
+  font-size: 20px;
 }
