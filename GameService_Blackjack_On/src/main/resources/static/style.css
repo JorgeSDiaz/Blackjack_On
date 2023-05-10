@@ -1,5 +1,5 @@
 #zone-bet {
-  background-color: #4b5071;
+  background-color: #480909;
   float: left;
   position: relative;
   top: 0;
@@ -23,7 +23,7 @@ body {
 } 
 
 #zone-actions {
-  background-color: #4b5071;
+  background-color: #480909;
   float: right;
   position: relative;
   top: 0;
@@ -170,7 +170,7 @@ body {
   padding: 38px 30px;
   max-width: 450px;
   height: 45%;
-  min-width: 400px;
+  min-width: 500px;
   min-height: 300px;
   background-color: rgb(2, 168, 2);
   border: 0.5em solid rgb(11, 91, 11);
@@ -236,8 +236,8 @@ body {
 
 #box-section{
   background-color: rgb(11, 91, 11);
-  width: 230px;
-  height: 230px;
+  width: 320px;
+  height: 250px;
   display: block;
   align-items: center;
   position: absolute;
@@ -251,8 +251,8 @@ body {
 
 .box {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
-  grid-template-rows: repeat(2, 1fr); /* 2 filas de igual altura */
+  grid-template-columns: repeat(3, 0.5fr); /* 3 columnas de igual ancho */
+  grid-template-rows: repeat(2, 0.5fr); /* 2 filas de igual altura */
   justify-content: center;
   align-items: center;
 }
@@ -265,10 +265,12 @@ body {
   margin: 3px;
 }
 
+.box .btn {
+  font-size: 14px;
+  padding: 2px 4px;
+}
+
 .NONE{
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 3px;
 }
 
@@ -276,4 +278,9 @@ body {
   font-weight: bold;
   color: #eee;
   font-size: 20px;
+}
+.form-control-custom {
+  margin: 3px;
+  font-size: 8px;
+  padding: 2px 4px;
 }
