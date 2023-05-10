@@ -1,18 +1,21 @@
 #zone-bet {
-  background-color: #313346;
+  background-color: #4b5071;
   float: left;
   position: relative;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 200px;
+  width: 120px;
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
 body {
-  background-color: #44465F;
+  background-image: url('src/carpet3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: #440909 ; */
 }
 
 #header img{
@@ -20,13 +23,13 @@ body {
 } 
 
 #zone-actions {
-  background-color: #313346;
+  background-color: #4b5071;
   float: right;
   position: relative;
   top: 0;
   right: 0;
   height: 100vh;
-  width: 200px;
+  width: 120px;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -94,62 +97,65 @@ body {
 
 
 #button-bet {
-  border: 2px solid #A2920E;
-  border-radius: 50%;
-  padding: 30px 30px;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
   top: 500px;
   position: absolute;
+  border-radius: 60px;
+  padding: 40px 25px;
+  color: #ffffff;
+  border: 5px solid;
 }
 
-
+#button-bet:active {
+  background-color: rgb(223, 231, 3);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+}
 
 
 
 
 #button-card {
-  border: 2px solid #012DAB;
-  border-radius: 50%;
-  padding: 40px 30px;
-  background-color: transparent;
+  border-radius: 60px;
+  padding: 40px 25px;
   color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
   z-index: 3;
   top: 200px;
   position: absolute;
+  border: 5px solid;
+}
+
+#button-card:active {
+  background-color: rgb(0, 52, 165);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
 
 #button-plant {
-  border: 2px solid #0B8E05;
-  border-radius: 50%;
+  border-radius: 60px;
   padding: 40px 25px;
-  background-color: transparent;
   color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
   z-index: 2;
   top: 350px;
   position: absolute;
+  border: 5px solid;
+}
+
+#button-plant:active {
+  background-color: rgb(0, 132, 13);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
 
 #button-fold {
-  border: 2px solid #AF0F02;
-  border-radius: 50%;
-  padding: 38px 30px;
-  background-color: transparent;
+  border-radius: 60px;
+  padding: 40px 25px;
   color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
   z-index: 1;
   top:500px;
   position: absolute;
+  border: 5px solid;
+}
+
+#button-fold:active {
+  background-color: rgb(182, 0, 0);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
 
 #zone-table {
@@ -173,24 +179,26 @@ body {
   }
 
 #button-start {
-  border: 2px solid #000000;
-  border-radius: 50%;
-  padding: 38px 30px;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  top:590px;
+  top: 500px;
   position: absolute;
+  border-radius: 60px;
+  padding: 40px 25px;
+  cursor: pointer;
+  top:580px;
   right: 230px;
+  border: 5px solid;
+}
+
+#button-start:active {
+  background-color: rgba(0, 92, 162, 0.619);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
 
 .seat{
-  border : 2px solid red;
-  border-radius: 50%;
+  border : 2px solid rgb(255, 255, 255);
+  border-radius: 60px;
   padding: 25px 10px;
-  background-color: transparent;
+  background-color: black;
   color: white;
   font-size: 20px;
   font-weight: bold;
