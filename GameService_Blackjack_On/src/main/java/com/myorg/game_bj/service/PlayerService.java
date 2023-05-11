@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class PlayerService {
     @Getter
-    private List<Player> players;
+    private final List<Player> players;
 
     public PlayerService() {
         this.players = new ArrayList<>();

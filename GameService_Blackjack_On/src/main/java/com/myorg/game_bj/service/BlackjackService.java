@@ -10,7 +10,7 @@ import java.util.Random;
 
 @Service
 public class BlackjackService {
-    private List<Card> deck;
+    private final List<Card> deck;
     private final List<Card> usedCards;
     private final Random random;
 
