@@ -20,19 +20,19 @@ public class GameController {
     GameService service;
 
     @GetMapping("/player")
-    public ResponseEntity<?> getUsers() {
-        return new ResponseEntity<>(service.getPlayers(), HttpStatus.OK);
+    public ResponseEntity<List<Player>> getUsers() {
+        return new ResponseEntity<>(service.listPlayers(), HttpStatus.OK);
     }
 
     @PostMapping("/card")
-    public ResponseEntity<?> drawCard() {
-        Card drawedCard = service.draw();
+    public ResponseEntity<Card> drawCard() {
+        Card drawedCard = service.drawCard();
         message.convertAndSend("/topic/cards", drawedCard);
         return new ResponseEntity<>(drawedCard, HttpStatus.OK);
     }
 
     @PostMapping("/player")
-    public ResponseEntity<?> addPlayer(@RequestBody Player newPlayer) {
+    public ResponseEntity<List<Player>> addPlayer(@RequestBody Player newPlayer) {
         List<Player> players = service.intoPlayer(newPlayer);
         message.convertAndSend("/topic/players", players);
         return new ResponseEntity<>(players, HttpStatus.OK);
