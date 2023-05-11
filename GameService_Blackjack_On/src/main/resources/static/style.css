@@ -4,7 +4,7 @@
   position: relative;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 110vh;
   width: 120px;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@ body {
   position: relative;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 110vh;
   width: 120px;
   justify-content: center;
   align-items: center;
@@ -275,6 +275,13 @@ body {
 }
 
 .text{
+  font-weight: bold;
+  color: #eee;
+  font-size: 20px;
+ }
+
+
+.text-bet-initial{
   font-weight: bold;
   color: #eee;
   font-size: 20px;
