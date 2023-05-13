@@ -1,5 +1,5 @@
-const app = (() => {
-    let apiClient = client;
+const appUser = (() => {
+    let apiUser = clientUser;
     let stompClient = null;
 
     const showTableBox = () =>{
@@ -45,9 +45,10 @@ const app = (() => {
             connect();
             console.log(player);
         },
-        chooseBet : (number) => {
+        chooseBet : (number) =>{
             setTextNumber(number);
         }
+        
 
 
 

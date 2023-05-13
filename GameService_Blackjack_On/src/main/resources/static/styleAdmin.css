@@ -100,7 +100,7 @@ body {
   top: 500px;
   position: absolute;
   border-radius: 60px;
-  padding: 40px 25px;
+  padding: 30px 35px;
   color: #ffffff;
   border: 5px solid;
 }
@@ -115,7 +115,7 @@ body {
 
 #button-card {
   border-radius: 60px;
-  padding: 40px 25px;
+  padding: 40px 30px;
   color: #ffffff;
   z-index: 3;
   top: 200px;
@@ -143,9 +143,9 @@ body {
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
 
-#button-fold {
+#button-start {
   border-radius: 60px;
-  padding: 40px 25px;
+  padding: 40px 30px;
   color: #ffffff;
   z-index: 1;
   top:500px;
@@ -153,7 +153,7 @@ body {
   border: 5px solid;
 }
 
-#button-fold:active {
+#button-start:active {
   background-color: rgb(182, 0, 0);
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
 }
@@ -178,21 +178,6 @@ body {
   margin-top:350px;
   }
 
-#button-start {
-  top: 500px;
-  position: absolute;
-  border-radius: 60px;
-  padding: 40px 25px;
-  cursor: pointer;
-  top:580px;
-  right: 230px;
-  border: 5px solid;
-}
-
-#button-start:active {
-  background-color: rgba(0, 92, 162, 0.619);
-  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
-}
 
 .seat{
   border : 2px solid rgb(255, 255, 255);
@@ -237,8 +222,8 @@ body {
 #box-section{
   background-color: rgb(11, 91, 11);
   width: 320px;
-  height: 250px;
-  display: block;
+  height: 150px;
+  display: none;
   align-items: center;
   position: absolute;
   top: 50%;
@@ -286,6 +271,8 @@ body {
   color: #eee;
   font-size: 20px;
 }
+
+
 .form-control-custom {
   margin: 3px;
   font-size: 8px;

@@ -1,4 +1,4 @@
-client = (() => {
+clientAdmin = (() => {
     // Private
     const resource = "http://localhost:8080/v1/game";
     const registerBet = (id, owner, token) => {
