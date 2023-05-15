@@ -11,7 +11,8 @@ import java.util.Random;
 @Service
 public class BlackjackService {
     private final List<Card> deck;
-    private final List<Card> usedCards;
+    private final List<Integer> usedCards;
+    private String initialBet;
     private final Random random;
 
     public BlackjackService() {
@@ -24,11 +25,18 @@ public class BlackjackService {
         int range = this.deck.size();
         int index = this.random.nextInt(range);
 
-        Card selectedCard = this.deck.remove(index);
+        while (!usedCards.contains(index)) {
+            index = this.random.nextInt(range);
+        }
 
-        this.usedCards.add(selectedCard);
+        Card selectedCard = this.deck.remove(index);
+        this.usedCards.add(index);
 
         return selectedCard;
+    }
+
+    public void setInitialBet(String bet) {
+        this.initialBet = bet;
     }
 
     public void reset() {
