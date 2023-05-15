@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/user")
 @CrossOrigin(origins = "*")
@@ -15,17 +17,17 @@ public class UserController {
     UserService service;
 
     @GetMapping("/")
-    public ResponseEntity<?> getUsers() {
+    public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(service.list(), HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> saveUSer(@RequestBody User newUser) {
+    public ResponseEntity<User> saveUSer(@RequestBody User newUser) {
         return new ResponseEntity<>(service.add(newUser), HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
+    public ResponseEntity<String> login(@RequestBody User user) {
         return new ResponseEntity<>(service.login(user), HttpStatus.OK);
     }
 
