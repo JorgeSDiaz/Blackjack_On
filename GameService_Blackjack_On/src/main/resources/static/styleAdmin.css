@@ -4,7 +4,7 @@
   position: relative;
   top: 0;
   left: 0;
-  height: 110vh;
+  height: 100vh;
   width: 120px;
   justify-content: center;
   align-items: center;
@@ -28,7 +28,7 @@ body {
   position: relative;
   top: 0;
   right: 0;
-  height: 110vh;
+  height: 100vh;
   width: 120px;
   justify-content: center;
   align-items: center;
@@ -277,4 +277,108 @@ body {
   margin: 3px;
   font-size: 8px;
   padding: 2px 4px;
+}
+
+
+
+#zone-cards {
+  position: absolute;
+  left: 360px;
+  top: 350px;
+  background-color: rgb(2, 168, 2);
+  width: 400px;
+  height: 95px;
+  border: 0.2em solid rgb(11, 91, 11);
+  border-radius: 50px;
+  align-items: center;
+}
+
+
+.card{
+  width: 10%;
+  height: 80%;
+  display: inline-block;
+  position: relative;
+  left: 5%;
+  top:10%;
+  background-color: rgb(2, 168, 2) ;
+  border: 2% solid rgb(11, 91, 11);
+  border-radius: 10px;
+  background-image: none;
+  background-size: cover;
+  background-position: center;
+}
+
+
+#text-number-of-cards{
+  display: inline-block;
+  position: relative;
+  left: 10%;
+  top:-50%;
+}
+
+#cards-crupier{
+  width: 30%;
+  height: 25%;
+  position: absolute;
+  left: 35%;
+  top: -16%;
+  display: inline-block;
+  position: relative;
+
+
+}
+
+
+#cards-user1{
+  width: 30%;
+  height: 25%;
+  position: absolute;
+  left: -45%;
+  top: 22%;
+  transform: rotate(90deg);
+  display: inline-block;
+  position: relative;
+  align-items: center;
+
+
+  
+}
+
+#cards-user2{
+  width: 30%;
+  height: 25%;
+  position: absolute;
+  right: 27%;
+  top: 90%;
+  display: inline-block;
+  position: relative;
+  align-items: center;
+  
+}
+
+#cards-user3{
+  width: 30%;
+  height: 25%;
+  position: absolute;
+  left: 83%;
+  top: -5%;
+  transform: rotate(90deg);
+  display: inline-block;
+  position: relative;
+  align-items: center;
+  
+}
+
+.cards-in-table{
+  width: 20%;
+  height: 90%;
+  display: inline-block;
+  position: relative;
+  left: 35%;
+  background-size: cover;
+  background-position: center;
+  border: 2% solid black;
+  
+
 }

@@ -57,6 +57,22 @@
         <div class="seat" id="seat1">EMPTY</div>
         <div class="seat" id="seat2">EMPTY</div>
         <div class="seat" id="seat3">EMPTY</div>
+        <div id="cards-crupier">
+            <div class="cards-in-table"></div>
+            <div class="cards-in-table"></div>
+        </div>
+        <div id="cards-user1">
+            <div class="cards-in-table"></div>
+            <div class="cards-in-table"></div>
+        </div>
+        <div id="cards-user2">
+            <div class="cards-in-table"></div>
+            <div class="cards-in-table"></div>
+        </div>
+        <div id="cards-user3">
+            <div class="cards-in-table"></div>
+            <div class="cards-in-table"></div>
+        </div>
         <div class="seat" id="crupier" style="background-image: url('src/bender.jpg');"></div>
         <div id="box-section">
             <p class="text">ITS TIME TO BET</p>
@@ -69,15 +85,33 @@
                 <button  onclick="appUser.chooseBet(21)" type="button" class="btn btn-outline-warning btn-sm">21</button>
             </div>
             <button type="button" class="NONE btn btn-outline-danger btn-sm">NONE</button>
+            <div id="menu-16" style="display:none;">
+                <a href="#">
+                    <img src="src/red.png" alt="10"  width="35" height="35">
+                </a>
+                <a href="#">
+                    <img src="src/yellow.png" alt="50"  width="35" height="35">
+                </a>
+                <a href="#">
+                    <img src="src/blue.png" alt="100"  width="35" height="35">
+                </a>
+                <a href="#">
+                    <img src="src/green.png" alt="500"  width="35" height="35">
+                </a>
+                <button type="button" class="btn btn-outline-info btn-sm done-button">done</button>
+            </div>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <button class="btn btn-dark btn-sm" type="button">BET</button>
-                </div>
-                <input type="text" class="form-control form-control-sm" placeholder="" aria-label="" aria-describedby="basic-addon1">
-              </div>
             <p class="text-bet-initial">YOUR BET IS FOR:</p>
+            <p class="text-bet-initial">YOUR BES IT:</p>
         </div>
     </div>
+
+    <div id="zone-cards">
+        <div class="card" id="1"></div>
+        <div class="card" id="2"></div>
+        <p id = text-number-of-cards>TOTAL</p>
+    </div>
+
 </div>
 
 
