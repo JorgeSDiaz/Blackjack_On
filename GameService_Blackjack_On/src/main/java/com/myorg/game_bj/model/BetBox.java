@@ -5,13 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Player {
-    private String username;
-    private Long coins;
-    private BetBox betBox;
-    private String rol;
+public class BetBox {
+    private String id;
+    private String amount;
+    private String owner;
+    private Map<String, Integer> tokens;
 }
