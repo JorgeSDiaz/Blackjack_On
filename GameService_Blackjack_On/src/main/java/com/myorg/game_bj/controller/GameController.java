@@ -22,6 +22,7 @@ public class GameController {
 
     @GetMapping("/player")
     public ResponseEntity<List<Player>> getUsers() {
+        message.convertAndSend("/topic/players", this.service.listPlayers());
         return new ResponseEntity<>(this.service.listPlayers(), HttpStatus.OK);
     }
 

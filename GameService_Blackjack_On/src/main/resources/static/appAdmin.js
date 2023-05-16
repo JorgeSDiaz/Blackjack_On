@@ -1,15 +1,24 @@
-const appAdmin = (() => {
+import {clientAdmin} from './clientAdmin.js';
+
+
+window.appAdmin = (() => {
     let apiAdmin = clientAdmin;
     let stompClient = null;
 
 
     const startGame = () =>{
-        //codigo que consume la api de game por parte del admin
-        let element = document.querySelector("#box-section");
-        element.style.display = "block";
+        
 
 
     }
+
+
+    const getPlayers = () =>{
+
+
+    }
+
+    
 
 
     
@@ -19,18 +28,21 @@ const appAdmin = (() => {
         console.info('Connect to Ws...');
         let socket = new SockJS('/blackjack-game');
         stompClient = Stomp.over(socket);
+
         stompClient.connect({}, (frame) => {
             console.log('Connected:' + frame);
             stompClient.subscribe("/topic/registerbet", (eventBody) => {
                 //CODE FOR CHANGE BOTTON
             });
 
-            stompClient.subscribe("/topic/addplayer", (eventBody) => {
-                //CODE FOR ADD PLAYER
+            stompClient.subscribe("/topic/players", (eventBody) => {
+                let answer = JSON.parse(eventBody.body);
+                alert(answer.name + "IN AT GAME");
             });
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
-                //CODE FOR START GAME
+                let element = document.querySelector("#box-section");
+                element.style.display = "block";
 
 
             });
@@ -41,9 +53,8 @@ const appAdmin = (() => {
 
     return {
         init: () => {
-            player = new URLSearchParams(window.location.search).get('user');
             connect();
-            console.log(player);
+            getPlayers();
         },
         start: () => {
             startGame();
