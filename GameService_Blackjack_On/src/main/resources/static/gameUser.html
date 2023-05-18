@@ -107,7 +107,7 @@
             </div>
             <div class="input-group mb-3">
             <p class="text-bet-initial">YOUR BET IS FOR:</p>
-            <p class="text-bet-initial">YOUR BES IT:</p>
+            <p class="text-bet-initial">YOUR BET IS:</p>
         </div>
     </div>
 
@@ -132,7 +132,7 @@
 <!-- Stomp-Websocket -->
 <script src="/node_modules/stomp-websocket/lib/stomp.min.js"></script>
 <!-- JQuery -->
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>    
@@ -140,5 +140,20 @@
 <script src="clientUser.js" type="module"></script>
 <script src="appUser.js" type="module"></script>
 <script src="game.js"></script>
+<script>
+    $(document).ready(function() {
+        // Mostrar el menú 16 cuando se hace clic en cualquier botón dentro de .box
+        $(".box button").click(function() {
+            $("#menu-16").show();
+            $(this).addClass("btn-primary").prop("disabled", true);
+        });
+
+        // Ocultar el menú 16 cuando se hace clic en el botón "done"
+        $("#menu-16 .done-button").click(function() {
+            $("#menu-16").hide();
+            $(".box button").removeClass("btn-secondary").prop("disabled", false);
+        });
+    });
+</script>
 </body>
 </html>
