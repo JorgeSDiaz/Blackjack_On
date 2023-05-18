@@ -7,15 +7,22 @@ window.appAdmin = (() => {
 
 
     const startGame = () =>{
-        
+        //debe a ver un codigo que me consuma el recurso de back
+
+
 
 
     }
 
 
     const getPlayers = () =>{
-
-
+        let promess = apiAdmin.addPlayers();
+        promess.then((players)=>{
+            console.log(players)
+        }).catch((err)=>{
+            console.log(err);
+        })
+        
     }
 
     
@@ -36,9 +43,28 @@ window.appAdmin = (() => {
             });
 
             stompClient.subscribe("/topic/players", (eventBody) => {
-                let answer = JSON.parse(eventBody.body);
-                alert(answer.name + "IN AT GAME");
+                let players = JSON.parse(eventBody.body);
+                let id = 1;
+                for(let i = 0; i < players.length;i++){
+                    if(players[i].rol === "admin"){
+                        let seatCrupier = document.getElementById('crupier');
+                        seatCrupier.style.border = "2px solid green";
+                        
+                    }
+                    else{
+                        let nameSeat = "#seat" + id;
+                        let seatPlayer = document.querySelector(nameSeat);
+                        seatPlayer.style.border = "2px solid green";
+                        let nameCoins = "#coins" +  id;
+                        let coinsPlayer = document.querySelector(nameCoins);
+                        coinsPlayer.textContent = players[i].coins;
+                        seatPlayer.textContent = players[i].username;
+                        id += 1;
+                    }
+                }
+                
             });
+            getPlayers();
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
                 let element = document.querySelector("#box-section");
@@ -47,14 +73,15 @@ window.appAdmin = (() => {
 
             });
 
+        
         });
+        
 
     }
 
     return {
         init: () => {
             connect();
-            getPlayers();
         },
         start: () => {
             startGame();
