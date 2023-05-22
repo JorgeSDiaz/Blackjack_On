@@ -1,5 +1,6 @@
 package com.myorg.game_bj.controller;
 
+import com.myorg.game_bj.exception.GameException;
 import com.myorg.game_bj.model.BetBox;
 import com.myorg.game_bj.model.Player;
 import com.myorg.game_bj.model.card.Card;
@@ -11,6 +12,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.myorg.game_bj.util.Response.*;
 
 @RestController
 @RequestMapping("/v1/game")
@@ -26,29 +29,52 @@ public class GameController {
     }
 
     @PostMapping("/player")
-    public ResponseEntity<List<Player>> addPlayer(@RequestBody Player newPlayer) {
-        List<Player> players = this.service.intoPlayer(newPlayer);
-        message.convertAndSend("/topic/players", players);
-        return new ResponseEntity<>(players, HttpStatus.OK);
+    public ResponseEntity<?> addPlayer(@RequestBody Player newPlayer) {
+        try {
+            List<Player> players = this.service.intoPlayer(newPlayer);
+            message.convertAndSend("/topic/players", players);
+            return new ResponseEntity<>(players, HttpStatus.OK);
+        } catch (GameException e) {
+            return new ResponseEntity<>(response("error",e.getMessage()), HttpStatus.OK);
+        }
     }
 
     @PostMapping("/card")
-    public ResponseEntity<Card> drawCard() {
-        Card drawedCard = this.service.drawCard();
-        message.convertAndSend("/topic/cards", drawedCard);
-        return new ResponseEntity<>(drawedCard, HttpStatus.OK);
+    public ResponseEntity<?> drawCard() {
+        try {
+            Card drawedCard = this.service.drawCard();
+            message.convertAndSend("/topic/cards", drawedCard);
+            return new ResponseEntity<>(drawedCard, HttpStatus.OK);
+        } catch (GameException e) {
+            return new ResponseEntity<>(response("error", e.getMessage()), HttpStatus.OK);
+        }
     }
 
     @PostMapping("/betBox/{username}")
-    public ResponseEntity<Player> betForABox(@RequestBody BetBox betBox, @PathVariable("username") String username) {
-        Player playerBet = this.service.registryABetBox(betBox, username);
-        message.convertAndSend("/topic/playerBetBox", playerBet);
-        return new ResponseEntity<>(playerBet, HttpStatus.OK);
+    public ResponseEntity<?> betForABox(@RequestBody BetBox betBox, @PathVariable("username") String username) {
+        try {
+            Player playerBet = this.service.registryABetBox(betBox, username);
+            message.convertAndSend("/topic/playerBetBox", playerBet);
+            return new ResponseEntity<>(playerBet, HttpStatus.OK);
+        } catch (GameException e) {
+            return new ResponseEntity<>(response("error", e.getMessage()), HttpStatus.OK);
+        }
     }
 
     @PostMapping("/bet/{bet}")
-    public ResponseEntity<String> initialBet(@PathVariable("bet") String bet) {
+    public ResponseEntity<?> initialBet(@PathVariable("bet") String bet) {
         this.service.registryInitialBet(bet);
         return new ResponseEntity<>("{\"response\": \"Ok\"}", HttpStatus.OK);
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<?> checkDeck(@RequestBody List<Card> cards) {
+        return new ResponseEntity<>(response("sum", Integer.toString(this.service.SumCards(cards))), HttpStatus.OK);
+    }
+
+    @GetMapping("/winner/{player1}/{player2}")
+    public ResponseEntity<?> checkWinner(@PathVariable String player1, @RequestBody List<Card> deck1 ,
+                                         @PathVariable String player2, @RequestBody List<Card> deck2) {
+        return new ResponseEntity<>(service.checkWinner(player1, deck1, player2, deck2), HttpStatus.OK);
     }
 }

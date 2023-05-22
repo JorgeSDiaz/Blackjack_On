@@ -2,6 +2,7 @@ package com.myorg.game_bj.service;
 
 import com.myorg.game_bj.model.card.Card;
 import com.myorg.game_bj.model.card.CardType;
+import com.myorg.game_bj.model.card.Weight;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,6 +34,43 @@ public class BlackjackService {
         this.usedCards.add(index);
 
         return selectedCard;
+    }
+
+    public int sumDeck(List<Card> deck) {
+        int sum = 0;
+
+        List<Card> num = deck.stream().filter((Card card) -> {
+            return !List.of(Weight.JACK.getValue(), Weight.QUEEN.getValue(), Weight.KING.getValue(), Weight.ACE.getValue())
+                    .contains(card.getWeight());
+        }).toList();
+        List<Card> noNum = deck.stream().filter((Card card) -> {
+            return List.of(Weight.JACK.getValue(), Weight.QUEEN.getValue(), Weight.KING.getValue(), Weight.ACE.getValue())
+                    .contains(card.getWeight());
+        }).toList();
+
+        for (Card card: num) {
+            sum += Integer.parseInt(card.getWeight());
+        }
+        for (Card card: noNum) {
+            if (List.of("J", "Q", "K").contains(card.getWeight())) {
+                sum += 10;
+            } else if (card.getWeight().equals("A")) {
+                if (sum <= 10) {
+                    sum += 11;
+                } else {
+                    sum += 1;
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    public String checkWinner(String player1, List<Card> deck1, String player2, List<Card> deck2) {
+        int sum1 = sumDeck(deck1);
+        int sum2 = sumDeck(deck2);
+
+        return sum1 <= 21 && sum1 > sum2 ? player1 : player2;
     }
 
     public void setInitialBet(String bet) {
