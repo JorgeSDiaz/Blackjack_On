@@ -1,92 +1,139 @@
 // Create the main myMSALObj instance
+
+
+
 // configuration parameters are located at authConfig.js
-
-
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let username = "";
 
-window.appLogin = (()=>{
+function selectAccount() {
+
+    /**
+     * See here for more info on account retrieval: 
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+
+    const currentAccounts = myMSALObj.getAllAccounts();
+    if (currentAccounts.length === 0) {
+        return;
+    } else if (currentAccounts.length > 1) {
+        // Add choose account code here
+        console.warn("Multiple accounts detected.");
+    } else if (currentAccounts.length === 1) {
+        username = currentAccounts[0].username;
+    }
+}
+
+function handleResponse(response) {
+
+    /**
+     * To see the full list of response object properties, visit:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#response
+     */
+
+    if (response !== null) {
+        username = response.account.username;
+        seeRole().then(() =>{
+                window.location.href = '/menu.html';
+
+            })
+            .catch((err) =>{
+                console.error(err);
+            })
+        
+        }
+    else{
+        selectAccount();
+    }
+}
+
+
+function getTokenPopup(request) {
+
+    /**
+     * See here for more info on account retrieval: 
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+    request.account = myMSALObj.getAccountByUsername(username);
     
-    const selectAccount = ()=> {
+    return myMSALObj.acquireTokenSilent(request)
+        .catch(error => {
+            console.warn("silent token acquisition fails. acquiring token using popup");
+            if (error instanceof msal.InteractionRequiredAuthError) {
+                // fallback to interaction when silent call fails
+                return myMSALObj.acquireTokenPopup(request)
+                    .then(tokenResponse => {
+                        console.log(tokenResponse);
+                        return tokenResponse;
+                    }).catch(error => {
+                        console.error(error);
+                    });
+            } else {
+                console.warn(error);   
+            }
+    });
+}
 
-        /**
-         * See here for more info on account retrieval: 
-         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-         */
+function signIn() {
 
-        const currentAccounts = myMSALObj.getAllAccounts();
-        if (currentAccounts.length === 0) {
-            return;
-        } else if (currentAccounts.length > 1) {
-            // Add choose account code here
-            console.warn("Multiple accounts detected.");
-        } else if (currentAccounts.length === 1) {
-            username = currentAccounts[0].username;
-            console.log(username);
+    /**
+     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+     */
+
+    myMSALObj.loginPopup(loginRequest)
+        .then(handleResponse)
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function signOut() {
+
+    /**
+     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+     */
+
+    const logoutRequest = {
+        account: myMSALObj.getAccountByUsername(username),
+        postLogoutRedirectUri: msalConfig.auth.redirectUri,
+        mainWindowRedirectUri: msalConfig.auth.redirectUri
+    };
+
+    myMSALObj.logoutPopup(logoutRequest);
+}
+
+
+function saveInSessionStorage(response){
+    return new Promise((resolve,reject) =>{
+        let rol = response.jobTitle;
+        let name = response.displayName;
+        let user = {
+            "name":name,
+            "rol":rol
         }
-    }
+        console.log(user); 
+        sessionStorage.setItem('userInSession',JSON.stringify(user));
+    })
+}
 
-    const handleResponse = () => {
-
-        /**
-         * To see the full list of response object properties, visit:
-         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#response
-         */
-
-        if (response !== null) {
-            username = response.account.username;
-            console.log(response);
-        } else {
-            selectAccount();
-        }
-    }
-
-    const signIn = ()=> {
-
-        /**
-         * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-         */
-
-        myMSALObj.loginPopup(loginRequest)
-            .then(handleResponse)
-            .catch(error => {
-                console.error(error);
-            });
-    }
-
-    const  signOut = () => {
-
-        /**
-         * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-         */
-
-        const logoutRequest = {
-            account: myMSALObj.getAccountByUsername(username),
-            postLogoutRedirectUri: msalConfig.auth.redirectUri,
-            mainWindowRedirectUri: msalConfig.auth.redirectUri
-        };
-
-        myMSALObj.logoutPopup(logoutRequest);
-    }
+    
+    
 
 
-    return{
-        selectAccount : ()=>{
-            selectAccount();
-        },
-        signIn : ()=>{
-            signIn();
-        },
-        signOut : ()=>{
-            signOut();
-        }
-    }
-
-})();
+function seeRole() {
+    return getTokenPopup(loginRequest)
+        .then(response => {
+            callMSGraph(graphConfig.graphMeEndpoint, response.accessToken,saveInSessionStorage);
+        }).catch(error => {
+            console.error(error);
+        });
+}
 
 
-appLogin.selectAccount();
+
+
+selectAccount();
 

@@ -10,7 +10,7 @@
     crossorigin="anonymous"></script>
     <script type="text/javascript">
         if (typeof Msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.26.0/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
-      </script>
+    </script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -31,7 +31,7 @@
                         <h3>Sign In</h3>
                     </div>
                     <form>
-                        <input  value="Log In" class="btn btn-block btn-primary" onclick="appLogin.singIn()">
+                        <input  value="Log In" class="btn btn-block btn-primary" onclick="signIn()">
                     </form>
                 </div>
             </div>
@@ -41,9 +41,7 @@
 
 <script type="text/javascript" src="authConfig.js"></script>
 <script type="text/javascript" src="graphConfig.js"></script>
-<script src="authPopup.js" type="module"></script>
+<script type="text/javascript" src="authPopup.js"></script>
 <script type="text/javascript" src="graph.js"></script>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

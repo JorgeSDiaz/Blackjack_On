@@ -1,4 +1,7 @@
+
 import {mainApi} from './clientMain.js';
+
+
 
 
 
@@ -42,40 +45,56 @@ window.appMenu = (() => {
        }
     }
 
+
+
+        
+    
+        
+
+
+
+    
+
     
     
     const joinGame = () => {
-        let text = document.getElementById("name-user").value;
-        if(text === 'julian' || text === 'camilo' || text === 'jorge'){
-           var player = new user(text,1000,{},'user');
+        let objectString = sessionStorage.getItem('userInSession');
+        if(objectString !== null){
+            let userObject = JSON.parse(objectString);
+            let player = new user(userObject.name,1000,{},userObject.rol);
+            let promess = apiMain.joinMatch(player.getInfo());
+            promess.then(()=>{
+                if(player.getRole() === "user"){
+                    window.location.href = "/gameUser.html";
+                }
+                else{
+                    window.location.href = "/gameAdmin.html";
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
+
         }
-        else{
-            var player = new user(text,100000000,{},'admin');
-        }
-        const infoPlayer = player.getInfo();
-        const promess = apiMain.joinMatch(infoPlayer);
-        promess.then(() =>{
-            if(player.getRole() === 'user'){
-                window.location.href = '/gameUser.html';
-            }
-            else{
-                window.location.href = '/gameAdmin.html';
-            }
-        }).catch((err) =>{
-            alert('ERROR' + err);
-        })
+        console.log(objectString);
+       
+        
+        
+        
     }
 
     
 
 
-
-
-
     return{
-       join : () => {
+
+        init : () =>{
+            init();
+        },
+        join : () => {
             joinGame();
-       } 
+       }
+       
+       
 
     }
 
@@ -83,3 +102,4 @@ window.appMenu = (() => {
 
 
 appMenu;
+
