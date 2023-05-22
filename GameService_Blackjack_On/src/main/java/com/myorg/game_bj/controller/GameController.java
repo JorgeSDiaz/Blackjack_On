@@ -47,9 +47,5 @@ public class GameController {
         return new ResponseEntity<>(playerBet, HttpStatus.OK);
     }
 
-    @PostMapping("/bet/{bet}")
-    public ResponseEntity<String> initialBet(@PathVariable("bet") String bet) {
-        this.service.registryInitialBet(bet);
-        return new ResponseEntity<>("{\"response\": \"Ok\"}", HttpStatus.OK);
-    }
+    
 }

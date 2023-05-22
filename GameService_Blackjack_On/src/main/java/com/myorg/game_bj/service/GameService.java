@@ -23,9 +23,6 @@ public class GameService {
         this.blackjackService.reset();
     }
 
-    public void registryInitialBet(String bet) {
-        this.blackjackService.setInitialBet(bet);
-    }
 
     public List<Player> intoPlayer(Player newPlayer) {
         return playerService.add(newPlayer);

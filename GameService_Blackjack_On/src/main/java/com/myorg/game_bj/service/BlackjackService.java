@@ -12,7 +12,6 @@ import java.util.Random;
 public class BlackjackService {
     private final List<Card> deck;
     private final List<Integer> usedCards;
-    private String initialBet;
     private final Random random;
 
     public BlackjackService() {
@@ -35,9 +34,6 @@ public class BlackjackService {
         return selectedCard;
     }
 
-    public void setInitialBet(String bet) {
-        this.initialBet = bet;
-    }
 
     public void reset() {
         initDeck();

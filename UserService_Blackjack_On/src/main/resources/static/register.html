@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="shortcut icon" href="img/cards.png" type="image/x-icon">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Sign Up</title>
+</head>
+<body>
+<div class="d-lg-flex half">
+  <div class="bg order-1 order-md-2"
+       style="background-image: url('img/Leonardo_Diffusion_Las_Vegas_casino_scenery_background_colorfu_3.jpg');"></div>
+  <div class="contents order-2 order-md-1">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-7">
+          <div class="mb-4">
+            <h3>Sign Up</h3>
+          </div>
+          <form action="#" method="post">
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" id="re-username" placeholder="Username" required="">
+            </div>
+            <div class="form-group mb-3">
+              <input type="email" class="form-control" id="email" placeholder="Email" required="">
+            </div>
+            <div class="form-group mb-3">
+              <input type="password" class="form-control" id="re-password" placeholder="Password" required="">
+            </div>
+            <div class="form-group mb-3">
+              <input type="password" class="form-control" id="re-npassword" placeholder="Re-Type Password" required="">
+            </div>
+<!--            <div class="d-flex mb-5 align-items-center">-->
+<!--              <label id="error-password" class="control-label col-md-12 text-danger" style="display: none;">Las constraseñas no coinciden</label>-->
+<!--            </div>-->
+            <div class="d-flex mb-5 align-items-center">
+              <span class="ml-auto"><a href="login.html" class="forgot-pass">Log In</a></span>
+            </div>
+            <input type="submit" value="Sign up" class="btn btn-block btn-primary" onclick="app.register(); event.preventDefault();">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="client.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
