@@ -9,6 +9,7 @@ import {mainApi} from './clientMain.js';
 window.appMenu = (() => {
 
     var apiMain = mainApi;
+    var objectString = null;
 
 
     function user(name,coins,betBox,role){
@@ -45,21 +46,18 @@ window.appMenu = (() => {
        }
     }
 
-
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        objectString = sessionStorage.getItem('userInSession');
+        if(objectString === null){
+            window.location.href =  "/401.html";
+        }
+        
+    });
 
         
-    
-        
-
-
-
-    
-
-    
     
     const joinGame = () => {
-        let objectString = sessionStorage.getItem('userInSession');
-        if(objectString !== null){
             let userObject = JSON.parse(objectString);
             let player = new user(userObject.name,1000,{},userObject.rol);
             let promess = apiMain.joinMatch(player.getInfo());
@@ -73,13 +71,6 @@ window.appMenu = (() => {
             }).catch((err)=>{
                 console.log(err);
             })
-
-        }
-        console.log(objectString);
-       
-        
-        
-        
     }
 
     

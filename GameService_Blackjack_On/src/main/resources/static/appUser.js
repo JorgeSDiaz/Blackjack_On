@@ -5,6 +5,15 @@ window.appUser = (() => {
     let apiUser = clientUser;
     let stompClient = null;
 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let objectString = sessionStorage.getItem('userInSession');
+        if(objectString === null){
+            window.location.href =  "/401.html";
+        }
+        
+    });
+
     const showTableBox = () =>{
         
     }

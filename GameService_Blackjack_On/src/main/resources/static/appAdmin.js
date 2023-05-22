@@ -5,6 +5,14 @@ window.appAdmin = (() => {
     let apiAdmin = clientAdmin;
     let stompClient = null;
 
+    document.addEventListener('DOMContentLoaded', function() {
+        let objectString = sessionStorage.getItem('userInSession');
+        if(objectString === null){
+            window.location.href =  "/401.html";
+        }
+        
+    });
+
 
     const startGame = () =>{
         //debe a ver un codigo que me consuma el recurso de back
@@ -25,6 +33,8 @@ window.appAdmin = (() => {
         
     }
 
+
+
     
 
 
@@ -41,6 +51,8 @@ window.appAdmin = (() => {
             stompClient.subscribe("/topic/registerbet", (eventBody) => {
                 //CODE FOR CHANGE BOTTON
             });
+
+            getPlayers();
 
             stompClient.subscribe("/topic/players", (eventBody) => {
                 let players = JSON.parse(eventBody.body);
@@ -64,7 +76,7 @@ window.appAdmin = (() => {
                 }
                 
             });
-            getPlayers();
+            
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
                 let element = document.querySelector("#box-section");

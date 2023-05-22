@@ -21,3 +21,23 @@ function callMSGraph(endpoint, token, callback) {
         .then(response => callback(response))
         .catch(error => console.log(error));
 }
+
+
+function callMSGraph(endpoint, token) {
+    const headers = new Headers();
+    const bearer = `Bearer ${token}`;
+
+
+    headers.append("Authorization", bearer);
+
+    const options = {
+        method: "GET",
+        headers: headers
+    };
+
+    console.log('request made to Graph API at: ' + new Date().toString());
+
+    return fetch(endpoint, options)
+        .then(response => response.json())
+        .catch(error => console.log(error));
+}
