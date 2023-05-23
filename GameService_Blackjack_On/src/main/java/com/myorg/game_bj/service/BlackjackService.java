@@ -24,10 +24,10 @@ public class BlackjackService {
 
     public Card draw() {
         int range = this.deck.size();
-        int index = this.random.nextInt(range);
+        int index = this.random.nextInt(range + 1);
 
         while (!usedCards.contains(index)) {
-            index = this.random.nextInt(range);
+            index = this.random.nextInt(range + 1);
         }
 
         Card selectedCard = this.deck.remove(index);

@@ -2,6 +2,7 @@ package com.myorg.game_bj.model.card;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @NoArgsConstructor
 @Getter
