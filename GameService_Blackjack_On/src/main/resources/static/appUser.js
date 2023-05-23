@@ -1,3 +1,4 @@
+
 import {clientUser} from './clientUser.js';
 
 
@@ -7,6 +8,7 @@ window.appUser = (() => {
     let objectString = null;
     let numberForBetInitial = 0;
     let mountForBetInitial = 0;
+    let objectStringJSON = null;
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -15,6 +17,7 @@ window.appUser = (() => {
             window.location.href =  "/401.html";
         }
         addPlayers();
+        objectStringJSON = JSON.parse(objectString);
         
     });
 
@@ -57,14 +60,29 @@ window.appUser = (() => {
 
 
     const setTextNumber = (number) =>{
-        numberForBetInitial = number;
+        numberForBetInitial = parseInt(number);
         const element = document.querySelector('.text-bet-initial');
         element.innerHTML = "YOUR BET IS FOR: " + number;
             
     }
 
     const done = ()=>{
-        
+        let betBox = {
+            "id":numberForBetInitial.toString(),
+            "amount": mountForBetInitial.toString(),
+            "owner": objectStringJSON.name,
+            "tokens" : {}
+        };
+        let promess = apiUser.registerBet(betBox,objectStringJSON.name);
+        promess.then((response)=>{
+            console.log(response)
+        }).catch((err)=>{
+            alert(err);
+
+        });
+
+
+
     }
 
  
@@ -79,7 +97,7 @@ window.appUser = (() => {
                 requestAnimationFrame(()=>{
                     let player = JSON.parse(eventBody.body);
                     const element = document.getElementById(player.id);
-                    element.classList.replace('btn-outline-warning', 'btn-outline-alert');
+                    element.classList.replace('btn-outline-warning', 'btn-outline-danger');
                     button.style.pointerEvents = "none";
                     button.style.cursor = "none";
                 })
@@ -147,6 +165,9 @@ window.appUser = (() => {
         },
         autoIncrement : ()=>{
             autoIncrement();
+        },
+        done : () =>{
+            done();
         }
 
 
