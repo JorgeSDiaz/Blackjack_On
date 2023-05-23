@@ -2,7 +2,7 @@ package com.myorg.game_bj.service;
 
 import com.myorg.game_bj.exception.GameException;
 import com.myorg.game_bj.model.BetBox;
-import com.myorg.game_bj.model.Player;
+import com.myorg.game_bj.model.player.Player;
 import com.myorg.game_bj.model.card.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

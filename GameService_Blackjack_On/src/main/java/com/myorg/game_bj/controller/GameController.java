@@ -23,6 +23,22 @@ public class GameController {
     @Autowired
     GameService service;
 
+
+    @GetMapping("")
+    public ResponseEntity<?> start(){
+        boolean rta = this.service.start();
+        message.convertAndSend("/topic/startgame", "OK");
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+
+    }
+
+    @GetMapping("/endinitialbet")
+    public ResponseEntity<?> end(){
+        message.convertAndSend("/topic/endinitialbet", "OK");
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
+
+
     @GetMapping("/player")
     public ResponseEntity<List<Player>> getUsers() {
         return new ResponseEntity<>(this.service.listPlayers(), HttpStatus.OK);
@@ -74,7 +90,8 @@ public class GameController {
 
     @GetMapping("/winner/{player1}/{player2}")
     public ResponseEntity<?> checkWinner(@PathVariable String player1, @RequestBody List<Card> deck1 ,
-                                         @PathVariable String player2, @RequestBody List<Card> deck2) {
+                                         @PathVariable String player2, @RequestBody List<Card> deck2){
         return new ResponseEntity<>(service.checkWinner(player1, deck1, player2, deck2), HttpStatus.OK);
     }
 }
+

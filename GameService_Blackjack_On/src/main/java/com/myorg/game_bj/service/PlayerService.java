@@ -1,7 +1,7 @@
 package com.myorg.game_bj.service;
 
 import com.myorg.game_bj.model.BetBox;
-import com.myorg.game_bj.model.Player;
+import com.myorg.game_bj.model.player.Player;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +25,9 @@ public class PlayerService {
 
         return playerList;
     }
+    public Player getPlayer(String username) {
+        return players.get(username);
+    }
 
     public Player getPlayer(String username) {
         return players.get(username);
@@ -42,8 +45,10 @@ public class PlayerService {
             return new Player();
         }
 
-        ownerBox.get(0).setBetBox(betBox);
+        players.get(username).setBetBox(betBox);
 
         return players.get(username);
     }
 }
+
+   

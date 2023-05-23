@@ -1,5 +1,6 @@
-package com.myorg.game_bj.model;
+package com.myorg.game_bj.model.player;
 
+import com.myorg.game_bj.model.BetBox;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class Player {
     private Long coins;
     private BetBox betBox;
     private String rol;
+    private PlayerStatus status;
 }
