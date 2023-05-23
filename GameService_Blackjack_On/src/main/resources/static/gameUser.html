@@ -34,7 +34,7 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">EXIT</a>
+                <a class="nav-link" href="#" onclick="app.exit()">EXIT</a>
                 </li>
             </ul>
             
@@ -52,7 +52,7 @@
         <div id= "ball"></div>
     </div>
     <input id="number" type="number" value="0">
-    <button id="button-bet" class="btn btn-warning">BET</button>
+    <button id="button-bet" class="btn btn-warning" onclick="appUser.bet()">BET</button>
 </div>
 <div id="zone-table">
     <div class="table">
@@ -123,9 +123,9 @@
 
 
 <div id="zone-actions">
-        <button id="button-card" class="btn btn-primary">CARD</button>
-        <button id="button-plant" class="btn btn-success">PLANT</button>
-        <button id="button-fold" class="btn btn-danger">FOLD</button>
+        <button id="button-card" class="btn btn-primary" onclick="appUser.card()">CARD</button>
+        <button id="button-plant" class="btn btn-success" onclick="appUser.plant()">PLANT</button>
+        <button id="button-fold" class="btn btn-danger" onclick="appUser.fold()">FOLD</button>
 </div>
 <!-- SockJs-Client -->
 <script src="/node_modules/sockjs-client/dist/sockjs.min.js"></script>
@@ -147,8 +147,6 @@
             $("#menu-16").show();
             $(this).addClass("btn-primary").prop("disabled", true);
         });
-
-        
     });
 </script>
 </body>

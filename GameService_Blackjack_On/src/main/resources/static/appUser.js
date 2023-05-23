@@ -89,6 +89,18 @@ window.appUser = (() => {
 
     }
 
+    const bet = ()=>{
+        let promess = apiUser.bet();
+        promess.then(()=>{
+            return request(apiUser.card());
+        }).then((response)=>{
+            console.log(response)
+
+        }).catch((err) =>{
+            alert(err)
+        })
+    }
+
  
 
     const connect = () => {
@@ -188,7 +200,23 @@ window.appUser = (() => {
         },
         done : () =>{
             done();
+        },
+        bet : () =>{
+            bet();
+        },
+        plant : () =>{
+            plant();
+        },
+        fold : () =>{
+            fold();
+        },
+        card : ()=>{
+            card();
+        },
+        exit : () =>{
+            exit();
         }
+
 
 
 
