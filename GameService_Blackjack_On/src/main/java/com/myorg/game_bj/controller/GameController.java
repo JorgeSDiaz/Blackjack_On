@@ -2,8 +2,8 @@ package com.myorg.game_bj.controller;
 
 import com.myorg.game_bj.exception.GameException;
 import com.myorg.game_bj.model.BetBox;
-import com.myorg.game_bj.model.Player;
 import com.myorg.game_bj.model.card.Card;
+import com.myorg.game_bj.model.player.Player;
 import com.myorg.game_bj.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.myorg.game_bj.util.Response.*;
+import static com.myorg.game_bj.util.Response.response;
 
 @RestController
 @RequestMapping("/v1/game")
@@ -32,13 +32,6 @@ public class GameController {
 
     }
 
-    @GetMapping("/endinitialbet")
-    public ResponseEntity<?> end(){
-        message.convertAndSend("/topic/endinitialbet", "OK");
-        return new ResponseEntity<>("OK", HttpStatus.OK);
-    }
-
-
     @GetMapping("/player")
     public ResponseEntity<List<Player>> getUsers() {
         return new ResponseEntity<>(this.service.listPlayers(), HttpStatus.OK);
@@ -53,6 +46,13 @@ public class GameController {
         } catch (GameException e) {
             return new ResponseEntity<>(response("error",e.getMessage()), HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/round")
+    public ResponseEntity<?> round() {
+        Player nextPlayer = service.round();
+        message.convertAndSend("/topic/nextPlayer", nextPlayer);
+        return new ResponseEntity<>(nextPlayer, HttpStatus.OK);
     }
 
     @PostMapping("/card")
@@ -81,6 +81,12 @@ public class GameController {
     public ResponseEntity<?> initialBet(@PathVariable("bet") String bet) {
         this.service.registryInitialBet(bet);
         return new ResponseEntity<>("{\"response\": \"Ok\"}", HttpStatus.OK);
+    }
+
+    @GetMapping("/endinitialbet")
+    public ResponseEntity<?> end(){
+        message.convertAndSend("/topic/endinitialbet", "OK");
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     @PostMapping("/check")

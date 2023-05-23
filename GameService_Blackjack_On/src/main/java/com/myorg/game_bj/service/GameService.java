@@ -58,6 +58,10 @@ public class GameService {
         return playerService.add(newPlayer);
     }
 
+    public Player round() {
+        return playerService.round();
+    }
+
     public List<Player> listPlayers() {
         return playerService.getPlayers();
     }
