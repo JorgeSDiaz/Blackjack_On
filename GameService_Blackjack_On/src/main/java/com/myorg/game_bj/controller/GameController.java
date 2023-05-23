@@ -77,6 +77,7 @@ public class GameController {
         }
     }
 
+<<<<<<< HEAD
     @PostMapping("/bet/{bet}")
     public ResponseEntity<?> initialBet(@PathVariable("bet") String bet) {
         this.service.registryInitialBet(bet);
@@ -94,3 +95,9 @@ public class GameController {
         return new ResponseEntity<>(service.checkWinner(player1, deck1, player2, deck2), HttpStatus.OK);
     }
 }
+=======
+
+
+    
+}
+>>>>>>> 815c9b3a879965d14baf5e6907be767fe608652c
