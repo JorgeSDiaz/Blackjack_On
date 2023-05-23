@@ -4,18 +4,43 @@ import {clientUser} from './clientUser.js';
 window.appUser = (() => {
     let apiUser = clientUser;
     let stompClient = null;
+    let objectString = null;
+    let numberForBetInitial = 0;
+    let mountForBetInitial = 0;
 
 
     document.addEventListener('DOMContentLoaded', function() {
-        let objectString = sessionStorage.getItem('userInSession');
+        objectString = sessionStorage.getItem('userInSession');
         if(objectString === null){
             window.location.href =  "/401.html";
         }
+        addPlayers();
         
     });
 
+
+    const autoIncrement = (cuant)=>{
+        mountForBetInitial += parseInt(cuant);
+        const element = document.querySelector('.text-bet-initial-bet');
+        element.innerHTML = "YOUR BET IS FOR: " + number;
+
+
+
+    }
+
+
+    
+
     const showTableBox = () =>{
+        let element = document.querySelector("#box-section");
+        element.style.display = "block";
+
         
+    }
+
+    const hideTableBox = () =>{
+        let element = document.querySelector("#box-section");
+        element.style.display = "none";
     }
 
     const addPlayers = () => {
@@ -32,6 +57,7 @@ window.appUser = (() => {
 
 
     const setTextNumber = (number) =>{
+        numberForBetInitial = number;
         const element = document.querySelector('.text-bet-initial');
         element.innerHTML = "YOUR BET IS FOR: " + number;
             
@@ -45,8 +71,15 @@ window.appUser = (() => {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, (frame) => {
             console.log('Connected:' + frame);
-            stompClient.subscribe("/topic/registerbet", (eventBody) => {
-                //CODE FOR CHANGE BOTTON
+            stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
+                requestAnimationFrame(()=>{
+                    let player = JSON.parse(eventBody.body);
+                    const element = document.getElementById(player.id);
+                    element.classList.replace('btn-outline-warning', 'btn-outline-alert');
+                    button.style.pointerEvents = "none";
+                    button.style.cursor = "none";
+                })
+                
             });
 
             stompClient.subscribe("/topic/players", (eventBody) => {
@@ -75,10 +108,23 @@ window.appUser = (() => {
             addPlayers();
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
-                //CODE FOR START GAME
+                requestAnimationFrame(()=>{
+                    showTableBox();
+                })
 
 
             });
+
+
+            stompClient.subscribe("/topic/startgame", (eventBody) => {
+                requestAnimationFrame(()=>{
+                    hideTableBox();
+                })
+
+
+            });
+
+            
 
         });
 
@@ -92,6 +138,9 @@ window.appUser = (() => {
         chooseBet : (number) =>{
             setTextNumber(number);
         },
+        registryBet : ()=>{
+            registryBet();
+        }
 
 
 

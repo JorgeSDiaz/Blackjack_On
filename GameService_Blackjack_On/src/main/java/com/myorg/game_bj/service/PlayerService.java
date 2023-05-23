@@ -38,7 +38,7 @@ public class PlayerService {
             return new Player();
         }
 
-        ownerBox.get(0).setBetBox(betBox);
+        players.get(username).setBetBox(betBox);
 
         return players.get(username);
     }

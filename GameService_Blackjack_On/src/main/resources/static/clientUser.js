@@ -1,13 +1,13 @@
 export const clientUser = (() => {
     // Private
     const resource = "http://localhost:8080/v1/game";
-    const registerBet = (id, owner, token) => {
+    const registerBet = (betBox,owner) => {
         return new Promise( (resolve, reject) => {
             $.ajax(
                 {
-                    url: resource + "/betBox/" + id + "/owner/" + owner,
+                    url: resource + "/betBox/" + owner,
                     type: "POST",
-                    data: JSON.stringify(token),
+                    data: JSON.stringify(betBox),
                     contentType: "application/json",
                     success: (data) => {
                         resolve(data);
@@ -44,8 +44,8 @@ export const clientUser = (() => {
 
     // Public
     return {
-        registerBet: (id, owner, token) => {
-            return registerBet(id, owner, token);
+        registerBet: (betBox,owner) => {
+            return registerBet(betBox, owner);
         },
         addPlayers : () =>{
             return addPlayers();
