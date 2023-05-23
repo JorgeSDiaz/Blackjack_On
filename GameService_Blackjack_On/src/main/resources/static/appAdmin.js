@@ -14,13 +14,20 @@ window.appAdmin = (() => {
     });
 
 
-    const startGame = () =>{
-        //debe a ver un codigo que me consuma el recurso de back
+    const showTableBox = () =>{
+        let element = document.querySelector("#box-section");
+        element.style.display = "block";
 
-
-
-
+        
     }
+
+    const hideTableBox = () =>{
+        let element = document.querySelector("#box-section");
+        element.style.display = "none";
+    }
+
+
+    
 
 
     const getPlayers = () =>{
@@ -48,11 +55,19 @@ window.appAdmin = (() => {
 
         stompClient.connect({}, (frame) => {
             console.log('Connected:' + frame);
-            stompClient.subscribe("/topic/registerbet", (eventBody) => {
-                //CODE FOR CHANGE BOTTON
+            stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
+                requestAnimationFrame(()=>{
+                    let player = JSON.parse(eventBody.body);
+                    const element = document.getElementById(player.id);
+                    element.classList.replace('btn-outline-warning', 'btn-outline-danger');
+                    button.style.pointerEvents = "none";
+                    button.style.cursor = "none";
+                })
+                
             });
 
-            getPlayers();
+
+            
 
             stompClient.subscribe("/topic/players", (eventBody) => {
                 let players = JSON.parse(eventBody.body);
@@ -76,11 +91,24 @@ window.appAdmin = (() => {
                 }
                 
             });
+            getPlayers();
+            
+
             
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
-                let element = document.querySelector("#box-section");
-                element.style.display = "block";
+                requestAnimationFrame(()=>{
+                    showTableBox();
+                })
+
+
+            });
+
+
+            stompClient.subscribe("/topic/endinitialbet", (eventBody) => {
+                requestAnimationFrame(()=>{
+                    hideTableBox();
+                })
 
 
             });
