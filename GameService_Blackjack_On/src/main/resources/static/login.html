@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://alcdn.msauth.net/browser/2.26.0/js/msal-browser.js"
+    integrity="sha384-fitpJWrpyl840mvd9nBFLGulqR4BJzvim0fzrXQKdsVh2AQzE4rTTJ0o5o+x+dRK"
+    crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        if (typeof Msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.26.0/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
+    </script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="img/cards.png" type="image/x-icon">
+    <link rel="stylesheet" href="loginStyle.css">
+
+    <title>Log In</title>
+</head>
+<body>
+<div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2"
+         style="background-image: url('img/Default_a_group_of_robots_playing_poker_in_a_robotonly_saloon_1_10cd0608-3f73-4199-8de9-30dd7b30c886_1.jpg');"></div>
+    <div class="contents order-2 order-md-1">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-7">
+                    <div class="mb-4">
+                        <h3>Sign In</h3>
+                    </div>
+                    <form>
+                        <input  value="Log In" class="btn btn-block btn-primary" onclick="signIn()">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="authConfig.js"></script>
+<script type="text/javascript" src="graphConfig.js"></script>
+<script type="text/javascript" src="authPopup.js"></script>
+<script type="text/javascript" src="graph.js"></script>
+</body>
+</html>
