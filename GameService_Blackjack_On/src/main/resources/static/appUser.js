@@ -25,7 +25,7 @@ window.appUser = (() => {
     const autoIncrement = (cuant)=>{
         mountForBetInitial += parseInt(cuant);
         const element = document.querySelector('.text-bet-initial-bet');
-        element.innerHTML = "YOUR BET IS: " + number;
+        element.innerHTML = "YOUR BET IS: " + mountForBetInitial;
 
 
 

@@ -233,7 +233,7 @@
     background-color: rgb(11, 91, 11);
     width: 320px;
     height: 250px;
-    display: block;
+    display: none;
     align-items: center;
     position: absolute;
     top: 50%;

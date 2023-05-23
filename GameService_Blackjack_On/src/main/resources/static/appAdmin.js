@@ -10,6 +10,7 @@ window.appAdmin = (() => {
         if(objectString === null){
             window.location.href =  "/401.html";
         }
+        getPlayers();
         
     });
 
