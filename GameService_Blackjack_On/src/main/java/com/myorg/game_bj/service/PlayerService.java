@@ -25,6 +25,9 @@ public class PlayerService {
 
         return playerList;
     }
+    public Player getPlayer(String username) {
+        return players.get(username);
+    }
 
     public List<Player> add(Player newPlayer) {
         players.put(newPlayer.getUsername(), newPlayer);
@@ -43,3 +46,5 @@ public class PlayerService {
         return players.get(username);
     }
 }
+
+   

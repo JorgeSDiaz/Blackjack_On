@@ -92,5 +92,6 @@ public class GameController {
     public ResponseEntity<?> checkWinner(@PathVariable String player1, @RequestBody List<Card> deck1 ,
                                          @PathVariable String player2, @RequestBody List<Card> deck2){
         return new ResponseEntity<>(service.checkWinner(player1, deck1, player2, deck2), HttpStatus.OK);
+    }
 }
 

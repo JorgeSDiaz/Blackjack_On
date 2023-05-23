@@ -280,7 +280,7 @@
   .text-bet-initial{
     font-weight: bold;
     color: #eee;
-    font-size: 16px;
+    font-size: 12px;
   }
   
   
@@ -418,6 +418,12 @@
     color: white;
   }
 
+
+  .text-bet-initial-bet{
+    font-weight: bold;
+    color: #eee;
+    font-size: 12px;
+  }
 
 
 
