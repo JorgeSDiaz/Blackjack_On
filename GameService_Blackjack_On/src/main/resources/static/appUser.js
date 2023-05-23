@@ -9,6 +9,7 @@ window.appUser = (() => {
     let numberForBetInitial = 0;
     let mountForBetInitial = 0;
     let objectStringJSON = null;
+    let playersInRoom = [];
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -107,6 +108,8 @@ window.appUser = (() => {
             addPlayers();
             stompClient.subscribe("/topic/players", (eventBody) => {
                 requestAnimationFrame(()=>{
+                    let nameSeat = "";
+                    let nameCoins = "";
                     let players = JSON.parse(eventBody.body);
                     let id = 1;
                     for(let i = 0; i < players.length;i++){
@@ -116,10 +119,18 @@ window.appUser = (() => {
                             
                         }
                         else{
-                            let nameSeat = "seat" + id;
+                            if(playersInRoom.includes(players[i].username)){
+                                nameSeat = "seat" + playersInRoom.indexOf(players[i].username) + 1;
+                                nameCoins = "#coins" + playersInRoom.indexOf(players[i].username) + 1;
+
+
+                            }else{
+                                nameSeat = "seat" + id;
+                                nameCoins = "#coins" +  id
+
+                            }
                             let seatPlayer = document.getElementById(nameSeat);
                             seatPlayer.style.border = "2px solid green";
-                            let nameCoins = "#coins" +  id;
                             let coinsPlayer = document.querySelector(nameCoins);
                             coinsPlayer.textContent = players[i].coins;
                             seatPlayer.textContent = players[i].username;
