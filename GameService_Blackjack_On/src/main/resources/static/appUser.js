@@ -19,12 +19,15 @@ window.appUser = (() => {
         }
         addPlayers();
         objectStringJSON = JSON.parse(objectString);
+        console.log(objectStringJSON);
         
     });
 
 
     const autoIncrement = (cuant)=>{
+        console.log(cuant);
         mountForBetInitial += parseInt(cuant);
+        console.log(mountForBetInitial);
         const element = document.querySelector('.text-bet-initial-bet');
         element.innerHTML = "YOUR BET IS: " + mountForBetInitial;
 
@@ -63,7 +66,7 @@ window.appUser = (() => {
     const setTextNumber = (number) =>{
         numberForBetInitial = parseInt(number);
         const element = document.querySelector('.text-bet-initial');
-        element.innerHTML = "YOUR BET IS FOR: " + number;
+        element.innerHTML = "YOUR BET IS FOR: " + numberForBetInitial;
             
     }
 
@@ -105,6 +108,8 @@ window.appUser = (() => {
                 })
                 
             });
+
+
             addPlayers();
             stompClient.subscribe("/topic/players", (eventBody) => {
                 requestAnimationFrame(()=>{
@@ -126,7 +131,8 @@ window.appUser = (() => {
 
                             }else{
                                 nameSeat = "seat" + id;
-                                nameCoins = "#coins" +  id
+                                nameCoins = "#coins" +  id;
+                                playersInRoom.push(players[i].username);
 
                             }
                             let seatPlayer = document.getElementById(nameSeat);
@@ -177,8 +183,8 @@ window.appUser = (() => {
         registryBet : ()=>{
             registryBet();
         },
-        autoIncrement : ()=>{
-            autoIncrement();
+        autoIncrement : (cuant)=>{
+            autoIncrement(cuant);
         },
         done : () =>{
             done();
