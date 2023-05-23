@@ -27,6 +27,17 @@ window.appAdmin = (() => {
     }
 
 
+    const startGame = () =>{
+        let promess = apiAdmin.start();
+        promess.then((players)=>{
+            console.log(players)
+        }).catch((err)=>{
+            console.log(err);
+        })
+
+    }
+
+
     
 
 
@@ -38,6 +49,15 @@ window.appAdmin = (() => {
             console.log(err);
         })
         
+    }
+
+    const endInitialBet = () =>{
+        let promess = apiAdmin.endInitialBet();
+        promess.then((players)=>{
+            console.log(players)
+        }).catch((err)=>{
+            console.log(err);
+        })
     }
 
 
@@ -125,6 +145,9 @@ window.appAdmin = (() => {
         },
         start: () => {
             startGame();
+        },
+        endInitialBet : () =>{
+            endInitialBet();
         }
         
 
