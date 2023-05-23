@@ -79,10 +79,11 @@ window.appAdmin = (() => {
             stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
                 requestAnimationFrame(()=>{
                     let player = JSON.parse(eventBody.body);
-                    const element = document.getElementById(player.id);
+                    console.log(player);
+                    const element = document.getElementById(player.betBox.id);
                     element.classList.replace('btn-outline-warning', 'btn-outline-danger');
-                    button.style.pointerEvents = "none";
-                    button.style.cursor = "none";
+                    element.style.pointerEvents = "none";
+                    element.style.cursor = "none";
                 })
                 
             });
