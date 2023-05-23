@@ -89,7 +89,7 @@ window.appAdmin = (() => {
 
 
             
-
+            getPlayers();
             stompClient.subscribe("/topic/players", (eventBody) => {
                 let players = JSON.parse(eventBody.body);
                 let id = 1;
@@ -112,7 +112,7 @@ window.appAdmin = (() => {
                 }
                 
             });
-            getPlayers();
+            
             
 
             

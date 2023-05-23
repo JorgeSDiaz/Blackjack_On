@@ -104,31 +104,33 @@ window.appUser = (() => {
                 })
                 
             });
-
+            addPlayers();
             stompClient.subscribe("/topic/players", (eventBody) => {
-                let players = JSON.parse(eventBody.body);
-                let id = 1;
-                for(let i = 0; i < players.length;i++){
-                    if(players[i].rol === "admin"){
-                        let seatCrupier = document.getElementById('crupier');
-                        seatCrupier.style.border = "2px solid green";
-                        
+                requestAnimationFrame(()=>{
+                    let players = JSON.parse(eventBody.body);
+                    let id = 1;
+                    for(let i = 0; i < players.length;i++){
+                        if(players[i].rol === "admin"){
+                            let seatCrupier = document.getElementById('crupier');
+                            seatCrupier.style.border = "2px solid green";
+                            
+                        }
+                        else{
+                            let nameSeat = "seat" + id;
+                            let seatPlayer = document.getElementById(nameSeat);
+                            seatPlayer.style.border = "2px solid green";
+                            let nameCoins = "#coins" +  id;
+                            let coinsPlayer = document.querySelector(nameCoins);
+                            coinsPlayer.textContent = players[i].coins;
+                            seatPlayer.textContent = players[i].username;
+                            id += 1;
+                        }
                     }
-                    else{
-                        let nameSeat = "seat" + id;
-                        let seatPlayer = document.getElementById(nameSeat);
-                        seatPlayer.style.border = "2px solid green";
-                        let nameCoins = "#coins" +  id;
-                        let coinsPlayer = document.querySelector(nameCoins);
-                        coinsPlayer.textContent = players[i].coins;
-                        seatPlayer.textContent = players[i].username;
-                        id += 1;
-                    }
-                }
+                })
 
                 
             });
-            addPlayers();
+            
 
             stompClient.subscribe("/topic/startgame", (eventBody) => {
                 requestAnimationFrame(()=>{
