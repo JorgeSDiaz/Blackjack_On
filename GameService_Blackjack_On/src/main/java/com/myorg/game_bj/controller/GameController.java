@@ -32,7 +32,7 @@ public class GameController {
 
     }
 
-    @GetMapping("/endInitialBet")
+    @GetMapping("/endinitialbet")
     public ResponseEntity<?> end(){
         message.convertAndSend("/topic/endinitialbet", "OK");
         return new ResponseEntity<>("OK", HttpStatus.OK);

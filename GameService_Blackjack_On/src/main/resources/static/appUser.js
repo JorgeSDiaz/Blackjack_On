@@ -93,6 +93,7 @@ window.appUser = (() => {
         stompClient = Stomp.over(socket);
         stompClient.connect({}, (frame) => {
             console.log('Connected:' + frame);
+
             stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
                 requestAnimationFrame(()=>{
                     let player = JSON.parse(eventBody.body);
@@ -138,7 +139,7 @@ window.appUser = (() => {
             });
 
 
-            stompClient.subscribe("/topic/startgame", (eventBody) => {
+            stompClient.subscribe("/topic/endinitialbet", (eventBody) => {
                 requestAnimationFrame(()=>{
                     hideTableBox();
                 })
