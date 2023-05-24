@@ -1,4 +1,10 @@
-FROM ubuntu:latest
-LABEL authors="j3d1d"
+FROM maven:3.8.4-openjdk-17
 
-ENTRYPOINT ["top", "-b"]
+WORKDIR /app
+
+COPY pom.xml .
+COPY src ./src
+
+EXPOSE 8080
+
+ENTRYPOINT ["mvn", "spring-boot:run"]
