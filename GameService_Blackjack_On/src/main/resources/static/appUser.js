@@ -1,5 +1,5 @@
-
 import {clientUser} from './clientUser.js';
+
 
 
 window.appUser = (() => {
@@ -10,6 +10,7 @@ window.appUser = (() => {
     let mountForBetInitial = 0;
     let objectStringJSON = null;
     let playersInRoom = [];
+    let cards = 1;
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -17,7 +18,7 @@ window.appUser = (() => {
         if(objectString === null){
             window.location.href =  "/401.html";
         }
-        addPlayers();
+     
         objectStringJSON = JSON.parse(objectString);
         console.log(objectStringJSON);
         
@@ -89,93 +90,126 @@ window.appUser = (() => {
 
     }
 
+    const bet= () =>{
+        console.log("hola");
+
+    }
+
+    const card= () =>{
+        let promess = apiUser.card();
+        promess.then((response)=>{
+            let card = "card" + cards;
+            const miDiv = document.getElementById(card);
+            const imagen = document.createElement('img');
+            imagen.id = "image";
+            let image =  "/src/cartas/"+ response.suit + response.weight + ".png";
+            imagen.src = image;
+            miDiv.appendChild(imagen);
+            cards += 1;
+            
+        }).catch((err)=>{
+            alert(err);
+
+        })
+    }
+
+    const plant= () =>{
+        console.log("hola");
+    }
+
+    const fold= () =>{
+        console.log("hola");
+    }
+
  
 
     const connect = () => {
-        console.info('Connect to Ws...');
-        let socket = new SockJS('/blackjack-game');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, (frame) => {
-            console.log('Connected:' + frame);
-
-            stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
-                requestAnimationFrame(()=>{
-                    let player = JSON.parse(eventBody.body);
-                    const element = document.getElementById(player.betBox.id);
-                    element.classList.replace('btn-outline-warning', 'btn-outline-danger');
-                    element.style.pointerEvents = "none";
-                    element.style.cursor = "none";
-                })
+            console.info('Connect to Ws...');
+            let socket = new SockJS('/blackjack-game');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, (frame) => {
+                console.log('Connected:' + frame);
+    
+                stompClient.subscribe("/topic/playerBetBox", (eventBody) => {
+                    requestAnimationFrame(()=>{
+                        let player = JSON.parse(eventBody.body);
+                        const element = document.getElementById(player.betBox.id);
+                        element.classList.replace('btn-outline-warning', 'btn-outline-danger');
+                        element.style.pointerEvents = "none";
+                        element.style.cursor = "none";
+                    })
+                    
+                });
+    
+    
                 
-            });
-
-
-            addPlayers();
-            stompClient.subscribe("/topic/players", (eventBody) => {
-                requestAnimationFrame(()=>{
-                    let nameSeat = "";
-                    let nameCoins = "";
-                    let players = JSON.parse(eventBody.body);
-                    let id = 1;
-                    for(let i = 0; i < players.length;i++){
-                        if(players[i].rol === "admin"){
-                            let seatCrupier = document.getElementById('crupier');
-                            seatCrupier.style.border = "2px solid green";
-                            
-                        }
-                        else{
-                            if(playersInRoom.includes(players[i].username)){
-                                nameSeat = "seat" + playersInRoom.indexOf(players[i].username) + 1;
-                                nameCoins = "#coins" + playersInRoom.indexOf(players[i].username) + 1;
-
-
-                            }else{
-                                nameSeat = "seat" + id;
-                                nameCoins = "#coins" +  id;
-                                playersInRoom.push(players[i].username);
-
+                stompClient.subscribe("/topic/players", (eventBody) => {
+                    requestAnimationFrame(()=>{
+                        let nameSeat = "";
+                        let nameCoins = "";
+                        let players = JSON.parse(eventBody.body);
+                        let id = 1;
+                        for(let i = 0; i < players.length;i++){
+                            if(players[i].rol === "admin"){
+                                let seatCrupier = document.getElementById('crupier');
+                                seatCrupier.style.border = "2px solid green";
+                                
                             }
-                            let seatPlayer = document.getElementById(nameSeat);
-                            seatPlayer.style.border = "2px solid green";
-                            let coinsPlayer = document.querySelector(nameCoins);
-                            coinsPlayer.textContent = players[i].coins;
-                            seatPlayer.textContent = players[i].username;
-                            id += 1;
+                            else{
+                                if(playersInRoom.includes(players[i].username)){
+                                    nameSeat = "seat" + playersInRoom.indexOf(players[i].username) + 1;
+                                    nameCoins = "#coins" + playersInRoom.indexOf(players[i].username) + 1;
+    
+    
+                                }else{
+                                    nameSeat = "seat" + id;
+                                    nameCoins = "#coins" +  id;
+                                    playersInRoom.push(players[i].username);
+    
+                                }
+                                let seatPlayer = document.getElementById(nameSeat);
+                                seatPlayer.style.border = "2px solid green";
+                                let coinsPlayer = document.querySelector(nameCoins);
+                                coinsPlayer.textContent = players[i].coins;
+                                seatPlayer.textContent = players[i].username;
+                                id += 1;
+                            }
                         }
-                    }
-                })
-
+                    })
+                    addPlayers();
+                    
+                });
+                addPlayers();
+    
+                stompClient.subscribe("/topic/startgame", (eventBody) => {
+                    requestAnimationFrame(()=>{
+                        showTableBox();
+                    })
+    
+    
+                });
+    
+    
+                stompClient.subscribe("/topic/endinitialbet", (eventBody) => {
+                    requestAnimationFrame(()=>{
+                        hideTableBox();
+                    })
+    
+    
+                });
+                addPlayers();
+    
                 
+    
             });
-            
+        }
+       
 
-            stompClient.subscribe("/topic/startgame", (eventBody) => {
-                requestAnimationFrame(()=>{
-                    showTableBox();
-                })
-
-
-            });
-
-
-            stompClient.subscribe("/topic/endinitialbet", (eventBody) => {
-                requestAnimationFrame(()=>{
-                    hideTableBox();
-                })
-
-
-            });
-
-            
-
-        });
-
-    }
+    
 
     return {
         init: () => {
             connect();
-            
         },
         chooseBet : (number) =>{
             setTextNumber(number);
@@ -188,6 +222,18 @@ window.appUser = (() => {
         },
         done : () =>{
             done();
+        },
+        bet : () =>{
+            bet();
+        },
+        card : () =>{
+            card();
+        },
+        plant : () =>{
+            plant();
+        },
+        fold : () =>{
+            fold();
         }
 
 

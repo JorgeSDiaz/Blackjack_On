@@ -41,6 +41,26 @@ export const clientUser = (() => {
         );
     };
 
+    const card = () =>{
+        return new Promise( (resolve, reject) => {
+            $.ajax(
+                {
+                    url: resource + "/card",
+                    type: "POST",
+                    contentType: "application/json",
+                    success: (data) => {
+                        resolve(data);
+                    },
+                    error: (err) => {
+                        reject(err);
+                    }
+                }
+            )
+            }
+        );
+
+    }
+
 
     // Public
     return {
@@ -50,6 +70,9 @@ export const clientUser = (() => {
         addPlayers : () =>{
             return addPlayers();
 
+        },
+        card : () =>{
+            return card();
         }
     };
 })();

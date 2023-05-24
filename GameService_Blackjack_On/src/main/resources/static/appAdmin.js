@@ -4,6 +4,7 @@ import {clientAdmin} from './clientAdmin.js';
 window.appAdmin = (() => {
     let apiAdmin = clientAdmin;
     let stompClient = null;
+    let playersInRoom = [];
 
     document.addEventListener('DOMContentLoaded', function() {
         let objectString = sessionStorage.getItem('userInSession');
@@ -55,7 +56,7 @@ window.appAdmin = (() => {
     const endInitialBet = () =>{
         let promess = apiAdmin.endInitialBet();
         promess.then((players)=>{
-            console.log(players)
+            
         }).catch((err)=>{
             console.log(err);
         })
@@ -92,26 +93,38 @@ window.appAdmin = (() => {
             
             getPlayers();
             stompClient.subscribe("/topic/players", (eventBody) => {
-                let players = JSON.parse(eventBody.body);
-                let id = 1;
-                for(let i = 0; i < players.length;i++){
-                    if(players[i].rol === "admin"){
-                        let seatCrupier = document.getElementById('crupier');
-                        seatCrupier.style.border = "2px solid green";
-                        
+                requestAnimationFrame(()=>{
+                    let nameSeat = "";
+                    let nameCoins = "";
+                    let players = JSON.parse(eventBody.body);
+                    let id = 1;
+                    for(let i = 0; i < players.length;i++){
+                        if(players[i].rol === "admin"){
+                            let seatCrupier = document.getElementById('crupier');
+                            seatCrupier.style.border = "2px solid green";
+                            
+                        }
+                        else{
+                            if(playersInRoom.includes(players[i].username)){
+                                nameSeat = "seat" + playersInRoom.indexOf(players[i].username) + 1;
+                                nameCoins = "#coins" + playersInRoom.indexOf(players[i].username) + 1;
+
+
+                            }else{
+                                nameSeat = "seat" + id;
+                                nameCoins = "#coins" +  id;
+                                playersInRoom.push(players[i].username);
+
+                            }
+                            let seatPlayer = document.getElementById(nameSeat);
+                            seatPlayer.style.border = "2px solid green";
+                            let coinsPlayer = document.querySelector(nameCoins);
+                            coinsPlayer.textContent = players[i].coins;
+                            seatPlayer.textContent = players[i].username;
+                            id += 1;
+                        }
                     }
-                    else{
-                        let nameSeat = "#seat" + id;
-                        let seatPlayer = document.querySelector(nameSeat);
-                        seatPlayer.style.border = "2px solid green";
-                        let nameCoins = "#coins" +  id;
-                        let coinsPlayer = document.querySelector(nameCoins);
-                        coinsPlayer.textContent = players[i].coins;
-                        seatPlayer.textContent = players[i].username;
-                        id += 1;
-                    }
-                }
-                
+                })
             });
             
             

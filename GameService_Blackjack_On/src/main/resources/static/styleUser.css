@@ -307,7 +307,22 @@
   }
 
 
-  .card{
+  #card1{
+    width: 10%;
+    height: 80%;
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    top:10%;
+    background-color: rgb(2, 168, 2) ;
+    border: 2% solid rgb(11, 91, 11);
+    border-radius: 10px;
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+  }
+
+  #card2{
     width: 10%;
     height: 80%;
     display: inline-block;
@@ -423,6 +438,14 @@
     font-weight: bold;
     color: #eee;
     font-size: 12px;
+  }
+
+
+  #image{
+    width:60px;
+    height: 90px;
+    position: absolute;
+
   }
 
 

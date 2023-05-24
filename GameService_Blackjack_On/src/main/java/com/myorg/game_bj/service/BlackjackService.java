@@ -19,21 +19,23 @@ public class BlackjackService {
     public BlackjackService() {
         this.usedCards = new ArrayList<>();
         this.deck = new ArrayList<>();
+        this.initDeck();
         this.random = new Random();
     }
 
     public Card draw() {
         int range = this.deck.size();
-        int index = this.random.nextInt(range + 1);
+        System.out.println(this.deck);
+        int index = this.random.nextInt(range);
 
-        while (!usedCards.contains(index)) {
-            index = this.random.nextInt(range + 1);
+        while (usedCards.contains(index)) {
+            index = this.random.nextInt(range);
         }
 
-        Card selectedCard = this.deck.remove(index);
+        
         this.usedCards.add(index);
 
-        return selectedCard;
+        return this.deck.get(index);
     }
 
     public int sumDeck(List<Card> deck) {

@@ -52,7 +52,7 @@
         <div id= "ball"></div>
     </div>
     <input id="number" type="number" value="0">
-    <button id="button-bet" class="btn btn-warning">BET</button>
+    <button id="button-bet" class="btn btn-warning" onclick="appUser.bet()">BET</button>
 </div>
 <div id="zone-table">
     <div class="table">
@@ -112,8 +112,8 @@
     </div>
 
     <div id="zone-cards">
-        <div class="card" id="1"></div>
-        <div class="card" id="2"></div>
+        <div id="card1"></div>
+        <div id="card2"></div>
         <p id = text-number-of-cards>TOTAL</p>
     </div>
 
@@ -123,9 +123,9 @@
 
 
 <div id="zone-actions">
-        <button id="button-card" class="btn btn-primary">CARD</button>
-        <button id="button-plant" class="btn btn-success">PLANT</button>
-        <button id="button-fold" class="btn btn-danger">FOLD</button>
+        <button id="button-card" class="btn btn-primary" onclick="appUser.card()">CARD</button>
+        <button id="button-plant" class="btn btn-success"onclick="appUser.plant()">PLANT</button>
+        <button id="button-fold" class="btn btn-danger"onclick="appUser.fold()">FOLD</button>
 </div>
 <!-- SockJs-Client -->
 <script src="/node_modules/sockjs-client/dist/sockjs.min.js"></script>
