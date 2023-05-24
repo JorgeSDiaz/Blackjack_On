@@ -17,6 +17,7 @@ import static com.myorg.game_bj.util.Response.response;
 
 @RestController
 @RequestMapping("/v1/game")
+@CrossOrigin(origins = "*")
 public class GameController {
     @Autowired
     SimpMessagingTemplate message;
@@ -25,7 +26,7 @@ public class GameController {
 
 
     @GetMapping("")
-    public ResponseEntity<?> start(){
+    public ResponseEntity<?> start() {
         boolean rta = this.service.start();
         message.convertAndSend("/topic/startgame", "OK");
         return new ResponseEntity<>("OK", HttpStatus.OK);
@@ -44,7 +45,7 @@ public class GameController {
             message.convertAndSend("/topic/players", players);
             return new ResponseEntity<>(players, HttpStatus.OK);
         } catch (GameException e) {
-            return new ResponseEntity<>(response("error",e.getMessage()), HttpStatus.OK);
+            return new ResponseEntity<>(response("error", e.getMessage()), HttpStatus.OK);
         }
     }
 
@@ -84,7 +85,7 @@ public class GameController {
     }
 
     @GetMapping("/endinitialbet")
-    public ResponseEntity<?> end(){
+    public ResponseEntity<?> end() {
         message.convertAndSend("/topic/endinitialbet", "OK");
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
@@ -95,8 +96,8 @@ public class GameController {
     }
 
     @GetMapping("/winner/{player1}/{player2}")
-    public ResponseEntity<?> checkWinner(@PathVariable String player1, @RequestBody List<Card> deck1 ,
-                                         @PathVariable String player2, @RequestBody List<Card> deck2){
+    public ResponseEntity<?> checkWinner(@PathVariable String player1, @RequestBody List<Card> deck1,
+                                         @PathVariable String player2, @RequestBody List<Card> deck2) {
         return new ResponseEntity<>(service.checkWinner(player1, deck1, player2, deck2), HttpStatus.OK);
     }
 }
