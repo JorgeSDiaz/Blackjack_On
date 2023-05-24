@@ -18,7 +18,6 @@ window.appMenu = (() => {
         let _betBox = betBox;
         let _role = role;
 
-
        this.getName = function(){
             return _name;
        }
@@ -34,6 +33,9 @@ window.appMenu = (() => {
        this.getRole = function(){
             return _role;
        }
+
+
+
 
        this.getInfo = function(){
             let info = {
@@ -60,7 +62,7 @@ window.appMenu = (() => {
     const joinGame = () => {
             let userObject = JSON.parse(objectString);
             let player = new user(userObject.name,1000,{},userObject.rol);
-            let promess = apiMain.joinMatch(player.getInfo());
+            let promess = apiMain.joinMatch(player.getInfo(),"WAITING");
             promess.then(()=>{
                 if(player.getRole() === "user"){
                     window.location.href = "/gameUser.html";

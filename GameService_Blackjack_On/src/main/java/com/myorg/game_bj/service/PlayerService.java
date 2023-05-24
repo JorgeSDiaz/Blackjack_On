@@ -36,7 +36,7 @@ public class PlayerService {
     }
 
     public void nextPLayer() {
-        this.currentPlayer.setStatus(PlayerStatus.WAITING);
+        this.currentPlayer.setStatus(PlayerStatus.WAITING.getType());
 
         setCurrentPlayer(
                 this.players.get(
@@ -46,7 +46,7 @@ public class PlayerService {
                 )
         );
 
-        this.currentPlayer.setStatus(PlayerStatus.PLAYING);
+        this.currentPlayer.setStatus(PlayerStatus.PLAYING.getType());
     }
 
     public void setOrder(List<String> order) {

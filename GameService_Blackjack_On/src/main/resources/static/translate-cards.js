@@ -1,3 +1,4 @@
-function translate(){
+function translate(suit,weigth){
+    if()
     
 }

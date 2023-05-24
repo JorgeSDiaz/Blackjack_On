@@ -2,7 +2,7 @@ export const mainApi = (() => {
 
     // Private
     const resource = "http://localhost:8080/v1/game";
-    const addPlayer = (player) => {
+    const addPlayer = (player,status) => {
         return new Promise( (resolve, reject) => {
             $.ajax(
                 {
@@ -26,8 +26,8 @@ export const mainApi = (() => {
 
     // Public
     return {
-        joinMatch: (player) => {
-            return addPlayer(player);
+        joinMatch: (player,status) => {
+            return addPlayer(player,status);
         }
     };
 })();

@@ -62,7 +62,9 @@ function signOut() {
         mainWindowRedirectUri: msalConfig.auth.redirectUri
     };
 
-    myMSALObj.logoutPopup(logoutRequest);
+    myMSALObj.logoutPopup(logoutRequest).then(()=>{
+        window.location.href = "/login.html";
+    })
 }
 
 function saveInSessionStorage(response) {

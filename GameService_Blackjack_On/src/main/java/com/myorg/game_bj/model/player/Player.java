@@ -15,5 +15,8 @@ public class Player {
     private Long coins;
     private BetBox betBox;
     private String rol;
-    private PlayerStatus status;
+    private String status;
+
+
+
 }
